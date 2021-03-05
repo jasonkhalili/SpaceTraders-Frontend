@@ -26,6 +26,8 @@ const App = () => {
             setCredits(res.data.user.credits);
             setLoans(res.data.user.loans);
             setShips(res.data.user.ships);
+
+            console.log(ships);
         })
   }, [credits, loans.length, ships.length])
   

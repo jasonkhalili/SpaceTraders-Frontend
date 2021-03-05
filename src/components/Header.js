@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
-      marginBottom: 20
+      marginBottom: 25
     },
     title: {
       flexGrow: 1,
@@ -25,6 +25,7 @@ const Header = (props) => {
                     <Typography variant="body2" className={classes.title}>
                         {props.credits} credits
                     </Typography>
+                    <Button color="inherit">Home</Button>
                     <Button color="inherit">Ships</Button>
                     <Button color="inherit">Loans</Button>
                     <Button color="inherit">Other</Button>
