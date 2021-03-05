@@ -14,15 +14,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Header = () => {
+const Header = (props) => {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
             <AppBar position="static" color="inherit">
                 <Toolbar>
-                    <Typography variant="h6" className={classes.title}>
-                        SpaceTraders
+                    <Typography variant="body2" className={classes.title}>
+                        {props.credits} credits
                     </Typography>
                     <Button color="inherit">Ships</Button>
                     <Button color="inherit">Loans</Button>
