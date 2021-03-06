@@ -13,6 +13,11 @@ const useStyles = makeStyles((theme) => ({
     title: {
       flexGrow: 1,
     },
+    credits: {
+        border: '10px solid #262626',
+        borderRadius: '20px',
+        backgroundColor: '#262626'
+    }
 }));
 
 const Header = (props) => {
@@ -23,7 +28,7 @@ const Header = (props) => {
             <AppBar position="static" color="inherit">
                 <Toolbar>
                     <Typography variant="body2" className={classes.title}>
-                        {props.credits} credits
+                        <span className={classes.credits}>{props.credits} credits</span>
                     </Typography>
                     <Button color="inherit">Home</Button>
                     <Button color="inherit">Ships</Button>
