@@ -27,7 +27,7 @@ const App = () => {
             setLoans(res.data.user.loans);
             setShips(res.data.user.ships);
 
-            console.log(ships);
+            console.log(loans);
         })
   }, [credits, loans.length, ships.length])
   
@@ -36,7 +36,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header credits={credits} />
-        <Landing credits={credits} loans={loans} ships={ships} />
+        <Landing username={username} credits={credits} loans={loans} ships={ships} />
       </ThemeProvider>
     </>
   )
