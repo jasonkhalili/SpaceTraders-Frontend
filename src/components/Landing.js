@@ -9,18 +9,34 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
     username: {
         marginBottom: '15px'
+    },
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
     }
 })
 
-const formatDate = (dueDate) => {
-    let date = new Date(dueDate).toString();
-    date = date.split(' GMT');
-    
-    return date[0];
+const dueDate = (dueDate) => {
+    let due = Date.parse(dueDate) - Date.now();
+    const sign = Math.sign(due);
+
+    due = Math.abs(due);
+    const days = Math.round(due / (60*60*24*1000));
+
+    if (sign === 1) {
+        // Loan is not due yet
+        return `in ${days} days`;
+
+    } else {
+        // Loan is past due
+        return `${days} days ago`;
+    }
 }
 
 const Landing = (props) => {
     const classes = useStyles();
+    const bull = <span className={classes.bullet}>•</span>;
 
     return(
         <>
@@ -33,14 +49,11 @@ const Landing = (props) => {
                         <Grid item xs={6}>
                             <Card>
                                 <CardContent>
-                                    <Typography>
-                                        {loan.repaymentAmount} credits due
-                                    </Typography>
-                                    <Typography>
-                                        Due {formatDate(loan.due)}
-                                    </Typography>
-                                    <Typography>
+                                    <Typography color="textSecondary" variant="subtitle2" gutterBottom>
                                         {loan.type}
+                                    </Typography>
+                                    <Typography variant="h6">
+                                        {loan.repaymentAmount} credits due {dueDate(loan.due)}
                                     </Typography>
                                 </CardContent>
                             </Card>
@@ -50,25 +63,25 @@ const Landing = (props) => {
                         <Grid item xs={6}>
                             <Card>
                                 <CardContent>
-                                    <Typography variant="h6" color="textPrimary">
+                                    <Typography variant="subtitle2" color="textSecondary" gutterBottom>
+                                        {ship.class} {bull} {ship.manufacturer}
+                                    </Typography>
+                                    <Typography variant="h5" color="textPrimary" gutterBottom>
                                         {ship.type}
                                     </Typography>
-                                    <Typography variant="subtitle1" color="textSecondary">
-                                        {ship.class}
-                                    </Typography>
-                                    <Typography>
-                                        {ship.manufacturer}
-                                    </Typography>
-                                    <Typography>
+                                    <Typography variant="h6">
                                         {ship.location}
                                     </Typography>
-                                    <Typography>
-                                        {ship.speed}
+                                    <Typography variant="h6">
+                                        Speed: {ship.speed}
                                     </Typography>
-                                    <Typography>
-                                        {ship.cargo}
+                                    <Typography variant="h6">
+                                        Space Available: {ship.spaceAvailable}
                                     </Typography>
-                            </CardContent>
+                                    <Typography variant="h6">
+                                        Weapons: {ship.weapons}
+                                    </Typography>
+                                </CardContent>
                             </Card>
                         </Grid>
                     )}
