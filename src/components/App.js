@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from 'axios';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline, createMuiTheme } from '@material-ui/core';
@@ -36,7 +37,14 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header credits={credits} />
-        <Landing username={username} credits={credits} loans={loans} ships={ships} />
+        <Router>
+          <Switch>
+            <Route 
+              exact path="/"
+              render={(props) => (<Landing username={username} credits={credits} loans={loans} ships={ships} />)}
+            />
+          </Switch>
+        </Router>
       </ThemeProvider>
     </>
   )
