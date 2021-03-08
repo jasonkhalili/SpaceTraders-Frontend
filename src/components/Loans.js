@@ -16,6 +16,9 @@ const postRequest = (username, token) => {
         .then(res => {
             console.log(res);
         })
+        .catch(err => {
+            console.log(err);
+        })
 }
 
 const Loans = (props) => {
