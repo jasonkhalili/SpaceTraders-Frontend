@@ -4,9 +4,19 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 
+const postRequest = (username, token) => {
+    axios.post(`https://api.spacetraders.io/users/${username}/loans?token=${token}`, {
+        type: 'STARTUP',
+    })
+        .then(res => {
+            console.log(res);
+        })
+}
 
 const Loans = (props) => {
     const [loans, setLoans] = useState([]);
@@ -27,16 +37,19 @@ const Loans = (props) => {
                     <Grid item xs={6}>
                         <Card>
                             <CardContent>
-                                <Typography>
+                                <Typography variant="h5" gutterBottom>
                                     {loan.amount} credits
                                 </Typography>
-                                <Typography>
+                                <Typography variant="body2">
                                     {((loan.amount * loan.rate) / 100) + loan.amount} credits due in {loan.termInDays} days
                                 </Typography>
-                                <Typography>
+                                <Typography variant="body2">
                                     {loan.type}
                                 </Typography>
                             </CardContent>
+                            <CardActions>
+                                <Button size="small" onClick={() => postRequest(props.username, props.token)}>Take out Loan</Button>
+                            </CardActions>
                         </Card>
                     </Grid>
                 )}
