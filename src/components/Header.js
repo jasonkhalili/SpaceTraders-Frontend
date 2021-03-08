@@ -20,10 +20,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const testFunction = () => {
-    console.log("sup")
-}
-
 const Header = (props) => {
     const classes = useStyles();
 
