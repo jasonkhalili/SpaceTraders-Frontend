@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline, createMuiTheme } from '@material-ui/core';
 
-import Landing from './Landing';
+import Home from './Home';
 import Header from './Header';
+import Login from './Login';
 
 const username = 'KobeBryant';
 const token = 'c724bc98-826a-46fa-8e3b-908c7ceb4ba6';
@@ -17,6 +18,7 @@ const theme = createMuiTheme({
 });
 
 const App = () => {
+
   const [credits, setCredits] = useState(0);
   const [loans, setLoans] = useState([]);
   const [ships, setShips] = useState([]);
@@ -27,27 +29,31 @@ const App = () => {
             setCredits(res.data.user.credits);
             setLoans(res.data.user.loans);
             setShips(res.data.user.ships);
-
-            console.log(ships);
         })
+
+        console.log(ships);
   }, [])
   
-  return (
-    <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Header credits={credits} />
+    return (
+      <>
         <Router>
-          <Switch>
-            <Route 
-              exact path="/"
-              render={(props) => (<Landing username={username} credits={credits} loans={loans} ships={ships} />)}
-            />
-          </Switch>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Header credits={credits} />
+
+            <Switch>
+              <Route path="/">
+                <Home
+                  username={username}
+                  loans={loans}
+                  ships={ships}
+                />
+              </Route>
+            </Switch>
+          </ThemeProvider>
         </Router>
-      </ThemeProvider>
-    </>
-  )
+      </>
+    )
 }
 
 export default App;

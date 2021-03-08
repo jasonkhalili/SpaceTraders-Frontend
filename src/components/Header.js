@@ -20,6 +20,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const testFunction = () => {
+    console.log("sup")
+}
+
 const Header = (props) => {
     const classes = useStyles();
 
@@ -30,7 +34,7 @@ const Header = (props) => {
                     <Typography variant="body2" className={classes.title}>
                         <span className={classes.credits}>{props.credits} credits</span>
                     </Typography>
-                    <Button color="inherit">Home</Button>
+                    <Button color="inherit" href="/">Home</Button>
                     <Button color="inherit">Ships</Button>
                     <Button color="inherit">Loans</Button>
                     <Button color="inherit">Other</Button>

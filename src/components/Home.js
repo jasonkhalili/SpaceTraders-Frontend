@@ -5,8 +5,9 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     username: {
         marginBottom: '15px'
     },
@@ -14,8 +15,14 @@ const useStyles = makeStyles({
         display: 'inline-block',
         margin: '0 2px',
         transform: 'scale(0.8)',
-    }
-})
+    },
+    root: {
+        '& > *': {
+          margin: theme.spacing(1),
+          width: '25ch',
+        },
+    },
+}));
 
 const dueDate = (dueDate) => {
     let due = Date.parse(dueDate) - Date.now();
@@ -34,7 +41,7 @@ const dueDate = (dueDate) => {
     }
 }
 
-const Landing = (props) => {
+const Home = (props) => {
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
 
@@ -69,18 +76,21 @@ const Landing = (props) => {
                                     <Typography variant="h5" color="textPrimary" gutterBottom>
                                         {ship.type}
                                     </Typography>
-                                    <Typography variant="h6">
+                                    <Typography variant="h6" color="textSecondary">
                                         {ship.location}
                                     </Typography>
-                                    <Typography variant="h6">
+                                    <Typography variant="h6" color="textSecondary">
                                         Speed: {ship.speed}
                                     </Typography>
-                                    <Typography variant="h6">
+                                    <Typography variant="h6" color="textSecondary">
                                         Space Available: {ship.spaceAvailable}
                                     </Typography>
-                                    <Typography variant="h6">
+                                    <Typography variant="h6" color="textSecondary">
                                         Weapons: {ship.weapons}
                                     </Typography>
+                                    <form className={classes.root} noValidate autoComplete="off">
+                                        <TextField id="outlined-basic" label="Name it!" variant="outlined" />
+                                    </form>
                                 </CardContent>
                             </Card>
                         </Grid>
@@ -91,4 +101,4 @@ const Landing = (props) => {
     )
 }
 
-export default Landing;
+export default Home;
