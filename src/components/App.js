@@ -6,10 +6,11 @@ import { CssBaseline, createMuiTheme } from '@material-ui/core';
 
 import Home from './Home';
 import Header from './Header';
+import Loans from './Loans';
 import Login from './Login';
 
 const username = 'KobeBryant';
-const token = 'c724bc98-826a-46fa-8e3b-908c7ceb4ba6';
+const token = 'f3bb856d-7780-4b39-a9ef-f28d03d637ec';
 
 const theme = createMuiTheme({
   palette: {
@@ -42,6 +43,12 @@ const App = () => {
             <Header credits={credits} />
 
             <Switch>
+              <Route path="/loans">
+                <Loans 
+                  username={username}
+                  token={token}
+                />
+              </Route>
               <Route path="/">
                 <Home
                   username={username}

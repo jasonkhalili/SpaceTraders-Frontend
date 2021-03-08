@@ -31,8 +31,8 @@ const Header = (props) => {
                         <span className={classes.credits}>{props.credits} credits</span>
                     </Typography>
                     <Button color="inherit" href="/">Home</Button>
-                    <Button color="inherit">Ships</Button>
-                    <Button color="inherit">Loans</Button>
+                    <Button color="inherit" href="/ships">Ships</Button>
+                    <Button color="inherit" href="/loans">Loans</Button>
                     <Button color="inherit">Other</Button>
                 </Toolbar>
             </AppBar>
