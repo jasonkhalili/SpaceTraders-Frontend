@@ -88,9 +88,6 @@ const Home = (props) => {
                                     <Typography variant="h6" color="textSecondary">
                                         Weapons: {ship.weapons}
                                     </Typography>
-                                    <form className={classes.root} noValidate autoComplete="off">
-                                        <TextField id="outlined-basic" label="Name it!" variant="outlined" />
-                                    </form>
                                 </CardContent>
                             </Card>
                         </Grid>

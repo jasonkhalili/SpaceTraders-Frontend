@@ -5,16 +5,30 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+
 
 const Ships = (props) => {
     const [ships, setShips] = useState([]);
+
+    const buyShip = (location, type) => {
+        axios.post(`https://api.spacetraders.io/users/${props.username}/ships?token=${props.token}`, {
+            location: `${location}`,
+            type: `${type}`
+        })
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     useEffect(() => {
         axios.get(`https://api.spacetraders.io/game/ships?token=${props.token}`)
             .then(res => {
                 setShips(res.data.ships);
             })
-            .then(console.log(ships))
     }, [])
 
     return (
@@ -34,7 +48,26 @@ const Ships = (props) => {
                                     {ship.manufacturer}
                                 </Typography>
                                 <Typography>
-
+                                    Max. Cargo: {ship.maxCargo}
+                                </Typography>
+                                <Typography>
+                                    Plating: {ship.plating}
+                                </Typography>
+                                <Typography>
+                                    Speed: {ship.speed}
+                                </Typography>
+                                <Typography>
+                                    Weapons: {ship.weapons}
+                                </Typography>
+                                <Typography gutterBottom>
+                                    {ship.purchaseLocations.map(loc =>
+                                        <>
+                                            <Typography>
+                                                {loc.location}: {loc.price} credits
+                                            </Typography>
+                                            <Button variant="contained" onClick={() => buyShip(loc.location, ship.type)}>Purchase</Button>
+                                        </>
+                                    )}
                                 </Typography>
                             </CardContent>
                         </Card>
