@@ -32,7 +32,6 @@ const App = () => {
             setLoans(res.data.user.loans);
             setShips(res.data.user.ships);
         })
-
         console.log(ships);
   }, [])
   
@@ -59,6 +58,7 @@ const App = () => {
               <Route path="/">
                 <Home
                   username={username}
+                  token={token}
                   loans={loans}
                   ships={ships}
                 />

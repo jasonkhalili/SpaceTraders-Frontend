@@ -6,6 +6,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     username: {
@@ -23,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
 }));
+
 
 const dueDate = (dueDate) => {
     let due = Date.parse(dueDate) - Date.now();
@@ -44,6 +47,21 @@ const dueDate = (dueDate) => {
 const Home = (props) => {
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
+
+
+    const purchaseFuel = () => {
+        axios.post(`https://api.spacetraders.io/users/${props.username}/purchase-orders?token=${props.token}`, {
+            shipId: 'ckm1lzmd382227xw89b0iouwwu',
+            good: 'FUEL',
+            quantity: 20
+        })
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
 
     return(
         <>
@@ -85,9 +103,10 @@ const Home = (props) => {
                                     <Typography variant="h6" color="textSecondary">
                                         Space Available: {ship.spaceAvailable}
                                     </Typography>
-                                    <Typography variant="h6" color="textSecondary">
+                                    <Typography variant="h6" color="textSecondary" gutterBottom>
                                         Weapons: {ship.weapons}
                                     </Typography>
+                                    <Button variant="contained" onClick={() => purchaseFuel()}>Purhcase Fuel</Button>
                                 </CardContent>
                             </Card>
                         </Grid>
