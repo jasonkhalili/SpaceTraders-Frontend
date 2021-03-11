@@ -48,7 +48,6 @@ const Home = (props) => {
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
 
-
     const purchaseFuel = () => {
         axios.post(`https://api.spacetraders.io/users/${props.username}/purchase-orders?token=${props.token}`, {
             shipId: 'ckm1lzmd382227xw89b0iouwwu',
@@ -62,6 +61,11 @@ const Home = (props) => {
             console.log(err);
         })
     }
+
+    if (props.ships.length !== 0) {
+        console.log(props.ships)
+    }
+    // console.log(props.ships[0].cargo);
 
     return(
         <>
@@ -97,6 +101,11 @@ const Home = (props) => {
                                     <Typography variant="h6" color="textSecondary">
                                         {ship.location}
                                     </Typography>
+                                    {ship.cargo.map(cargo =>
+                                        <Typography variant="h6" color="textSecondary">
+                                            {cargo.good}: {cargo.quantity}
+                                        </Typography>
+                                        )}
                                     <Typography variant="h6" color="textSecondary">
                                         Speed: {ship.speed}
                                     </Typography>

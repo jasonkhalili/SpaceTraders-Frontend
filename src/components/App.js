@@ -32,7 +32,6 @@ const App = () => {
             setLoans(res.data.user.loans);
             setShips(res.data.user.ships);
         })
-        console.log(ships);
   }, [])
   
     return (
