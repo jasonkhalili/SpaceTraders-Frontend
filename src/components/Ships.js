@@ -25,6 +25,7 @@ const Ships = (props) => {
     }
 
     useEffect(() => {
+        console.log(props);
         axios.get(`https://api.spacetraders.io/game/ships?token=${props.token}`)
             .then(res => {
                 setShips(res.data.ships);
