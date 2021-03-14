@@ -9,9 +9,9 @@ import Header from './Header';
 import Loans from './Loans';
 import Ships from './Ships';
 import Market from './Market';
+import Login from './Login';
 
-const username = 'KobeBryant';
-const token = 'f3bb856d-7780-4b39-a9ef-f28d03d637ec';
+const t = 'f3bb856d-7780-4b39-a9ef-f28d03d637ec';
 
 const theme = createMuiTheme({
   palette: {
@@ -19,14 +19,28 @@ const theme = createMuiTheme({
   }
 });
 
+
 const App = () => {
 
   const [credits, setCredits] = useState(0);
   const [loans, setLoans] = useState([]);
   const [ships, setShips] = useState([]);
   const [location, setLocation] = useState('');
+  const [username, setUsername] = useState('');
+  const [token, setToken] = useState('');
+
+  // setUsername('KobeBryant');
+  // setToken('f3bb856d-7780-4b39-a9ef-f28d03d637ec');
+
+  // const createUser = (u, t) => {
+  //   setUsername(u);
+  //   setToken(t);
+  // }
 
   useEffect(() => {
+    setUsername('KobeBryant');
+    setToken('f3bb856d-7780-4b39-a9ef-f28d03d637ec');
+    
     axios.get(`https://api.spacetraders.io/users/${username}?token=${token}`)
         .then(res => {
             setCredits(res.data.user.credits);
@@ -34,8 +48,8 @@ const App = () => {
             setShips(res.data.user.ships);
             setLocation(res.data.user.ships[0].location);
         })
-  }, [])
-  
+  }, [username])
+
     return (
       <>
         <Router>
@@ -62,6 +76,9 @@ const App = () => {
                   token={token}
                 />
               </Route>
+              {/* <Route path="/login">
+                <Login createUser={createUser}/>
+              </Route> */}
               <Route path="/">
                 <Home
                   username={username}
@@ -75,6 +92,6 @@ const App = () => {
         </Router>
       </>
     )
-}
+  }
 
 export default App;

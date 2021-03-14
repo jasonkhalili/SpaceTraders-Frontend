@@ -23,7 +23,7 @@ const Market = (props) => {
             axios.get(`https://api.spacetraders.io/game/locations/${props.location}/marketplace?token=${props.token}`)
                 .then(res => setMarket(res.data.planet.marketplace))
         }
-    }, [props.location])
+    }, [props])
 
     console.log(market);
 

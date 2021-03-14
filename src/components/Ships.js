@@ -39,7 +39,7 @@ const Ships = (props) => {
             .then(res => {
                 setShips(res.data.ships);
             })
-    }, [])
+    }, [props])
 
     return (
         <Container maxWidth="md">

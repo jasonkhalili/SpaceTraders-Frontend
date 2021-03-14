@@ -34,6 +34,7 @@ const Header = (props) => {
                     <Button color="inherit" href="/ships">Ships</Button>
                     <Button color="inherit" href="/loans">Loans</Button>
                     <Button color="inherit" href="/market">Market</Button>
+                    <Button color="inherit" href="/login">Login</Button>
                 </Toolbar>
             </AppBar>
         </div>

@@ -38,9 +38,7 @@ const Loans = (props) => {
             .then(res => {
                 setLoans(res.data.loans);
             })
-
-        console.log(loans);
-    }, [])
+    }, [props])
 
     return (
         <Container maxWidth="md">
