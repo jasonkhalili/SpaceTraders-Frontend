@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import { Typography } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,22 +23,22 @@ const useStyles = makeStyles((theme) => ({
 const Market = (props) => {
     const classes = useStyles();
 
-    const [systemList, setSystemList] = useState([]);
-    const [selectedSystem, setSelectedSystem] = useState([]);
+    const [systems, setSystems] = useState([]);
+    const [locations, setLocations] = useState([]);
 
-    const setSystem = (name) => {
-        let filtered = systemList.filter(system => system.name === name);
-        setSelectedSystem(filtered);
+    const assignLocations = (name) => {
+        let filtered = systems.filter(system => system.name === name);
+        filtered = filtered[0].locations.map(location => location);
+
+        setLocations(filtered);
     }
 
     useEffect(() => {
         axios.get(`https://api.spacetraders.io/game/systems?token=${props.token}`)
             .then(res => {
-                setSystemList(res.data.systems);
+                setSystems(res.data.systems);
             })
     }, [])
-
-    console.log(selectedSystem);
     
     return (
         <Container maxWidth="md">
@@ -49,19 +50,19 @@ const Market = (props) => {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                         >
-                            {systemList.map(system => 
-                                <MenuItem onClick={() => setSystem(system.name)}>{system.name}</MenuItem>
+                            {systems.map(system => 
+                                <MenuItem onClick={() => assignLocations(system.name)}>{system.name}</MenuItem>
                                 )}
                         </Select>
                     </FormControl>
                 </Grid>
             </Grid>
             <Grid container spacing={6}>
-                {selectedSystem[0].locations.map(system => 
+                {locations.map(system => 
                     <Grid item xs={6}>
                         <Card>
                             <CardContent>
-                                {system.name}
+                                <Typography>{system.name}</Typography>
                             </CardContent>
                         </Card>
                     </Grid>
