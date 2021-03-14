@@ -24,6 +24,7 @@ const App = () => {
   const [credits, setCredits] = useState(0);
   const [loans, setLoans] = useState([]);
   const [ships, setShips] = useState([]);
+  const [location, setLocation] = useState('');
 
   useEffect(() => {
     axios.get(`https://api.spacetraders.io/users/${username}?token=${token}`)
@@ -31,6 +32,7 @@ const App = () => {
             setCredits(res.data.user.credits);
             setLoans(res.data.user.loans);
             setShips(res.data.user.ships);
+            setLocation(res.data.user.ships[0].location);
         })
   }, [])
   
@@ -44,8 +46,8 @@ const App = () => {
             <Switch>
               <Route path="/market">
                 <Market 
-                  username={username}
                   token={token}
+                  location={location}
                 />
               </Route>
               <Route path="/loans">
