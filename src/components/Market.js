@@ -15,7 +15,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(1),
-        minWidth: "50%"
+        minWidth: "100%"
     },
 }));
 
@@ -23,6 +23,12 @@ const Market = (props) => {
     const classes = useStyles();
 
     const [systemList, setSystemList] = useState([]);
+    const [selectedSystem, setSelectedSystem] = useState([]);
+
+    const setSystem = (name) => {
+        let filtered = systemList.filter(system => system.name === name);
+        setSelectedSystem(filtered);
+    }
 
     useEffect(() => {
         axios.get(`https://api.spacetraders.io/game/systems?token=${props.token}`)
@@ -31,11 +37,11 @@ const Market = (props) => {
             })
     }, [])
 
-    console.log(systemList);
+    console.log(selectedSystem);
     
     return (
         <Container maxWidth="md">
-            <Grid container spacing={6}>
+            <Grid container spacing={6} alignItems="center" justify="center">
                 <Grid item xs={12}>
                     <FormControl className={classes.formControl}>
                         <InputLabel id="demo-simple-select-label">System</InputLabel>
@@ -44,11 +50,22 @@ const Market = (props) => {
                             id="demo-simple-select"
                         >
                             {systemList.map(system => 
-                                <MenuItem value={system.name}>{system.name}</MenuItem>
+                                <MenuItem onClick={() => setSystem(system.name)}>{system.name}</MenuItem>
                                 )}
                         </Select>
                     </FormControl>
                 </Grid>
+            </Grid>
+            <Grid container spacing={6}>
+                {selectedSystem[0].locations.map(system => 
+                    <Grid item xs={6}>
+                        <Card>
+                            <CardContent>
+                                {system.name}
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                )}               
             </Grid>
         </Container>
     )
