@@ -65,7 +65,6 @@ const Home = (props) => {
     if (props.ships.length !== 0) {
         console.log(props.ships)
     }
-    // console.log(props.ships[0].cargo);
 
     return(
         <>

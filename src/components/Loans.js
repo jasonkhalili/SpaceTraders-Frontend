@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -8,6 +9,12 @@ import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
+
+const useStyles = makeStyles((theme) => ({
+    loans: {
+        marginBottom: '15px'
+    }
+}));
 
 const postRequest = (username, token) => {
     axios.post(`https://api.spacetraders.io/users/${username}/loans?token=${token}`, {
@@ -22,6 +29,8 @@ const postRequest = (username, token) => {
 }
 
 const Loans = (props) => {
+    const classes = useStyles();
+
     const [loans, setLoans] = useState([]);
 
     useEffect(() => {
@@ -34,7 +43,8 @@ const Loans = (props) => {
     }, [])
 
     return (
-        <Container maxwidth="md">
+        <Container maxWidth="md">
+            <Typography variant="h4" className={classes.loans}>Loans</Typography>
             <Grid container spacing={6}>
                 {loans.map(loan =>
                     <Grid item xs={6}>

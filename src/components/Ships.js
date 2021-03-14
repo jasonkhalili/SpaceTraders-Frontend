@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container';
@@ -8,7 +9,15 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 
 
+const useStyles = makeStyles((theme) => ({
+    ships: {
+        marginBottom: '15px'
+    }
+}));
+
 const Ships = (props) => {
+    const classes = useStyles();
+
     const [ships, setShips] = useState([]);
 
     const buyShip = (location, type) => {
@@ -34,6 +43,7 @@ const Ships = (props) => {
 
     return (
         <Container maxWidth="md">
+            <Typography variant="h4" className={classes.ships}>Ships</Typography>
             <Grid container spacing={6}>
                 {ships.map(ship =>
                     <Grid item xs={6}>
