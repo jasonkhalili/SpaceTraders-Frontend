@@ -8,6 +8,7 @@ import Home from './Home';
 import Header from './Header';
 import Loans from './Loans';
 import Ships from './Ships';
+import Market from './Market';
 
 const username = 'KobeBryant';
 const token = 'f3bb856d-7780-4b39-a9ef-f28d03d637ec';
@@ -41,6 +42,12 @@ const App = () => {
             <Header credits={credits} />
 
             <Switch>
+              <Route path="/market">
+                <Market 
+                  username={username}
+                  token={token}
+                />
+              </Route>
               <Route path="/loans">
                 <Loans 
                   username={username}
