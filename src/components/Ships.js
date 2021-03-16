@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 
 
@@ -49,7 +50,7 @@ const Ships = (props) => {
                     <Grid item xs={6}>
                         <Card>
                             <CardContent>
-                                <Typography>
+                                <Typography variant="h6">
                                     {ship.type}
                                 </Typography>
                                 <Typography>
@@ -67,20 +68,22 @@ const Ships = (props) => {
                                 <Typography>
                                     Speed: {ship.speed}
                                 </Typography>
-                                <Typography>
+                                <Typography gutterBottom>
                                     Weapons: {ship.weapons}
                                 </Typography>
-                                <Typography gutterBottom>
+                                </CardContent>
                                     {ship.purchaseLocations.map(loc =>
                                         <>
-                                            <Typography>
-                                                {loc.location}: {loc.price} credits
-                                            </Typography>
-                                            <Button variant="contained" onClick={() => buyShip(loc.location, ship.type)}>Purchase</Button>
+                                            <CardContent>
+                                                <Typography>
+                                                    {loc.location}: {loc.price} credits
+                                                </Typography>
+                                            </CardContent>
+                                            <CardActions>
+                                                <Button size="small" onClick={() => buyShip(loc.location, ship.type)}>Purchase</Button>
+                                            </CardActions>
                                         </>
                                     )}
-                                </Typography>
-                            </CardContent>
                         </Card>
                     </Grid>
                 )}
