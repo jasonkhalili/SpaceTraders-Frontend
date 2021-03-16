@@ -32,14 +32,14 @@ const App = () => {
   // setUsername('KobeBryant');
   // setToken('f3bb856d-7780-4b39-a9ef-f28d03d637ec');
 
-  // const createUser = (u, t) => {
-  //   setUsername(u);
-  //   setToken(t);
-  // }
+  const createUser = (u, t) => {
+    setUsername(u);
+    setToken(t);
+  }
 
   useEffect(() => {
-    setUsername('KobeBryant');
-    setToken('f3bb856d-7780-4b39-a9ef-f28d03d637ec');
+    setUsername('Lebron');
+    setToken('0f642a2a-cfd9-4f98-91e0-00b088d096af');
     
     axios.get(`https://api.spacetraders.io/users/${username}?token=${token}`)
         .then(res => {
@@ -76,9 +76,9 @@ const App = () => {
                   token={token}
                 />
               </Route>
-              {/* <Route path="/login">
+              <Route path="/login">
                 <Login createUser={createUser}/>
-              </Route> */}
+              </Route>
               <Route path="/">
                 <Home
                   username={username}
